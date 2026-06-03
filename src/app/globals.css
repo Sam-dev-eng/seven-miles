@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+/* ──────────────────────────────────────────────────────────────
+   Dark Mode — use .dark class strategy (for next-themes toggle)
+   Tailwind v4 defaults to prefers-color-scheme; this overrides
+   it so dark: utilities respond to the .dark class on <html>.
+   ────────────────────────────────────────────────────────────── */
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ──────────────────────────────────────────────────────────────
+   Seven Miles — Global Styles & Theme Tokens
+   Tailwind CSS v4 — uses @import instead of @tailwind directives
+   ────────────────────────────────────────────────────────────── */
+
+/* ─── Custom Theme Tokens ──────────────────────────────────── */
+
+@theme {
+  --color-gold-50: #fdf8e8;
+  --color-gold-100: #faefc5;
+  --color-gold-200: #f5df8a;
+  --color-gold-300: #ecc94b;
+  --color-gold-400: #e8b828;
+  --color-gold-500: #d4a017;
+  --color-gold-600: #b8860b;
+  --color-gold-700: #946b08;
+  --color-gold-800: #6b4e06;
+  --color-gold-900: #422f04;
+
+  --color-dark-50: #f5f5f5;
+  --color-dark-100: #e5e5e5;
+  --color-dark-200: #d4d4d4;
+  --color-dark-300: #a3a3a3;
+  --color-dark-400: #737373;
+  --color-dark-500: #525252;
+  --color-dark-600: #404040;
+  --color-dark-700: #262626;
+  --color-dark-800: #171717;
+  --color-dark-900: #0a0a0a;
+
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+/* ─── Base Styles ──────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* ─── Custom Scrollbar ─────────────────────────────────────── */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold-500);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-600);
+}
+
+/* ─── Selection Color ──────────────────────────────────────── */
+
+::selection {
+  background-color: var(--color-gold-500);
+  color: white;
+}
+
+/* ─── Custom Utilities ─────────────────────────────────────── */
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--color-gold-400), var(--color-gold-600));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-gradient-gold {
+  background: linear-gradient(135deg, var(--color-gold-500), var(--color-gold-700));
+}
+
+.bg-gradient-gold-hover {
+  background: linear-gradient(135deg, var(--color-gold-400), var(--color-gold-600));
+}
+
+/* ─── Glass Effect ─────────────────────────────────────────── */
+
+.glass {
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+}
+
+/* ─── Animated Gradient Border ─────────────────────────────── */
+
+.border-gradient-gold {
+  border-image: linear-gradient(135deg, var(--color-gold-400), var(--color-gold-700)) 1;
+}
+
+/* ─── Smooth Theme Transitions ─────────────────────────────── */
+
+* {
+  transition-property: background-color, border-color, color;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}
+
+/* Override transition for elements that need instant changes */
+button,
+a,
+input,
+textarea,
+select {
+  transition-duration: 150ms;
+}
+
+/* Disable transitions during page load to prevent flash */
+.no-transitions * {
+  transition: none !important;
+}
