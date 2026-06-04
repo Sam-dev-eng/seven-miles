@@ -2,9 +2,9 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { Shield, BadgeCheck, Crown, TrendingUp } from "lucide-react";
+import { Shield, BadgeCheck, Crown, TrendingUp, Star, Quote } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { TRUST_BADGES, COMPANY_STATS } from "@/lib/constants";
+import { TRUST_BADGES, COMPANY_STATS, TESTIMONIALS } from "@/lib/constants";
 import type { ReactNode } from "react";
 
 const iconMap: Record<string, ReactNode> = {
@@ -43,7 +43,7 @@ function AnimatedCounter({ value }: { value: string }) {
 
 export function Testimonials() {
   return (
-    <section id="testimonials" className="py-20 lg:py-28 bg-white dark:bg-dark-800/50">
+    <section id="testimonials" className="py-20 lg:py-28 bg-white dark:bg-dark-900">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Trust Badges */}
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
@@ -59,17 +59,73 @@ export function Testimonials() {
         </motion.div>
 
         {/* Stats */}
-        <SectionHeading title="Our Impact" subtitle="Numbers that reflect our commitment to excellence in real estate." />
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {COMPANY_STATS.map((stat, i) => (
-            <motion.div key={stat.label} initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}
-              className="text-center p-6 lg:p-8 rounded-2xl bg-gradient-to-br from-gold-500/5 to-gold-700/10 border border-gold-500/20">
-              <p className="text-3xl lg:text-4xl font-heading font-bold text-gradient-gold mb-2">
-                <AnimatedCounter value={stat.value} />
-              </p>
-              <p className="text-sm text-dark-500 dark:text-dark-400 font-medium">{stat.label}</p>
-            </motion.div>
-          ))}
+        <div className="mb-20">
+          <SectionHeading title="Our Impact" subtitle="Numbers that reflect our commitment to excellence in real estate." />
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {COMPANY_STATS.map((stat, i) => (
+              <motion.div key={stat.label} initial={{ opacity: 0, scale: 0.8 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }}
+                className="text-center p-6 lg:p-8 rounded-2xl bg-gradient-to-br from-gold-500/5 to-gold-700/10 border border-gold-500/20">
+                <p className="text-3xl lg:text-4xl font-heading font-bold text-gradient-gold mb-2">
+                  <AnimatedCounter value={stat.value} />
+                </p>
+                <p className="text-sm text-dark-500 dark:text-dark-400 font-medium">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Reviews Testimonials Grid */}
+        <div className="pt-8 border-t border-dark-100 dark:border-dark-800">
+          <SectionHeading 
+            title="What Our Clients Say" 
+            subtitle="Read real stories from individuals and families who trusted us with their real estate goals." 
+          />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+            {TESTIMONIALS.map((testimonial, i) => (
+              <motion.div
+                key={testimonial.id}
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className="relative p-6 lg:p-8 rounded-2xl bg-dark-50 dark:bg-dark-850 border border-dark-100 dark:border-dark-750 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow"
+              >
+                {/* Quote Icon */}
+                <div className="absolute top-6 right-6 text-gold-500/15 dark:text-gold-500/10">
+                  <Quote size={40} className="transform rotate-180" />
+                </div>
+
+                <div className="space-y-4">
+                  {/* Rating */}
+                  <div className="flex items-center gap-1 text-gold-500">
+                    {Array.from({ length: testimonial.rating }).map((_, idx) => (
+                      <Star key={idx} size={16} fill="currentColor" />
+                    ))}
+                  </div>
+
+                  {/* Review Text */}
+                  <p className="text-dark-600 dark:text-dark-300 italic text-sm sm:text-base leading-relaxed relative z-10">
+                    "{testimonial.content}"
+                  </p>
+                </div>
+
+                {/* Profile Meta */}
+                <div className="flex items-center gap-4 mt-6 pt-4 border-t border-dark-100 dark:border-dark-700">
+                  <div className="h-10 w-10 rounded-full bg-gradient-to-br from-gold-400 to-gold-600 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                    {testimonial.name.split(" ").map(n => n[0]).join("")}
+                  </div>
+                  <div>
+                    <h4 className="font-heading font-bold text-dark-900 dark:text-white text-sm">
+                      {testimonial.name}
+                    </h4>
+                    <p className="text-xs text-dark-500 dark:text-dark-400">
+                      {testimonial.role}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
