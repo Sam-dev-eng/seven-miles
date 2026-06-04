@@ -169,11 +169,6 @@ export default function PropertiesPage() {
                             {property.type}
                           </span>
                         </div>
-                        <div className="absolute bottom-4 left-4">
-                          <p className="text-2xl font-heading font-bold text-white">
-                            {property.price}
-                          </p>
-                        </div>
                       </div>
 
                       {/* Description Area */}

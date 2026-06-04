@@ -38,9 +38,6 @@ export function FeaturedProperties() {
                     {property.isNew && <span className="px-3 py-1 text-xs font-semibold rounded-full bg-gold-500 text-white uppercase tracking-wider">New</span>}
                     <span className="px-3 py-1 text-xs font-semibold rounded-full bg-white/20 backdrop-blur-sm text-white capitalize">{property.type}</span>
                   </div>
-                  <div className="absolute bottom-4 left-4">
-                    <p className="text-2xl font-heading font-bold text-white">{property.price}</p>
-                  </div>
                 </div>
 
                 {/* Content */}

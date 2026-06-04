@@ -38,7 +38,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
   ).slice(0, 3);
 
   return (
-    <div className="pt-24 pb-16 bg-dark-50 dark:bg-dark-900/40 min-h-screen">
+    <div className="pt-24 pb-16 bg-dark-50 dark:bg-dark-900 min-h-screen">
       {/* ─── Breadcrumbs & Navigation ─── */}
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4">
         <ol className="flex items-center space-x-2 text-sm text-dark-500 dark:text-dark-400">
@@ -68,8 +68,8 @@ export default async function PropertyDetailPage({ params }: PageProps) {
             {/* Gallery */}
             <PropertyGallery images={property.images} title={property.title} />
 
-            {/* Title & Price Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-6 rounded-2xl bg-white dark:bg-dark-850 border border-dark-100 dark:border-dark-800">
+            {/* Title Header */}
+            <div className="p-6 rounded-2xl bg-white dark:bg-dark-850 border border-dark-100 dark:border-dark-800">
               <div className="space-y-2">
                 <span className="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-gold-500/10 text-gold-600 dark:text-gold-400 uppercase tracking-wider">
                   {property.type} For Sale
@@ -81,14 +81,6 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                   <MapPin size={16} className="text-gold-500 flex-shrink-0" />
                   <span>{property.location}</span>
                 </div>
-              </div>
-              <div className="sm:text-right">
-                <p className="text-sm font-medium text-dark-550 dark:text-dark-400 uppercase tracking-widest">
-                  Asking Price
-                </p>
-                <p className="text-3xl font-heading font-black text-gold-500 mt-1">
-                  {property.price}
-                </p>
               </div>
             </div>
 
@@ -232,9 +224,6 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                         <span className="px-3 py-1 text-xs font-semibold rounded-full bg-white/20 backdrop-blur-sm text-white capitalize">
                           {prop.type}
                         </span>
-                      </div>
-                      <div className="absolute bottom-4 left-4">
-                        <p className="text-xl font-heading font-bold text-white">{prop.price}</p>
                       </div>
                     </div>
                     
