@@ -37,6 +37,9 @@ export interface Property {
   area: string;
   type: "residential" | "commercial" | "land";
   image: string;
+  images: string[];
+  description: string;
+  features: string[];
   isNew?: boolean;
 }
 

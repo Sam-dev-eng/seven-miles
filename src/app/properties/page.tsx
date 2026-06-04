@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { MapPin, Bed, Bath, Maximize, Search, SlidersHorizontal, MessageCircle } from "lucide-react";
+import { MapPin, Bed, Bath, Maximize, Search, SlidersHorizontal, ArrowRight } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -141,84 +142,82 @@ export default function PropertiesPage() {
             >
               <AnimatePresence mode="popLayout">
                 {filteredProperties.map((property) => (
-                  <motion.div
-                    key={property.id}
-                    layout
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.3 }}
-                    whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                    className="group flex flex-col bg-white dark:bg-dark-800 border border-dark-100 dark:border-dark-700 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
-                  >
-                    {/* Image Area */}
-                    <div className="relative aspect-[4/3] overflow-hidden">
-                      <div 
-                        className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" 
-                        style={{ backgroundImage: `url(${property.image})` }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                      <div className="absolute top-4 left-4 flex gap-2">
-                        {property.isNew && (
-                          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-gold-500 text-white uppercase tracking-wider">
-                            New
+                  <Link href={`/properties/${property.id}`} key={property.id} className="block group h-full">
+                    <motion.div
+                      layout
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.3 }}
+                      whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                      className="flex flex-col bg-white dark:bg-dark-800 border border-dark-100 dark:border-dark-700 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 h-full"
+                    >
+                      {/* Image Area */}
+                      <div className="relative aspect-[4/3] overflow-hidden">
+                        <div 
+                          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" 
+                          style={{ backgroundImage: `url(${property.image})` }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                        <div className="absolute top-4 left-4 flex gap-2">
+                          {property.isNew && (
+                            <span className="px-3 py-1 text-xs font-semibold rounded-full bg-gold-500 text-white uppercase tracking-wider">
+                              New
+                            </span>
+                          )}
+                          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-white/20 backdrop-blur-sm text-white capitalize">
+                            {property.type}
                           </span>
-                        )}
-                        <span className="px-3 py-1 text-xs font-semibold rounded-full bg-white/20 backdrop-blur-sm text-white capitalize">
-                          {property.type}
-                        </span>
-                      </div>
-                      <div className="absolute bottom-4 left-4">
-                        <p className="text-2xl font-heading font-bold text-white">
-                          {property.price}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Description Area */}
-                    <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                      <div className="space-y-2">
-                        <h3 className="text-lg font-heading font-bold text-dark-900 dark:text-white group-hover:text-gold-500 transition-colors">
-                          {property.title}
-                        </h3>
-                        <div className="flex items-center gap-1.5 text-dark-500 dark:text-dark-400">
-                          <MapPin size={14} className="text-gold-500" />
-                          <span className="text-sm">{property.location}</span>
+                        </div>
+                        <div className="absolute bottom-4 left-4">
+                          <p className="text-2xl font-heading font-bold text-white">
+                            {property.price}
+                          </p>
                         </div>
                       </div>
 
-                      <div className="space-y-4">
-                        {/* Specs */}
-                        <div className="flex items-center gap-4 pt-4 border-t border-dark-100 dark:border-dark-700">
-                          {property.type !== "land" ? (
-                            <>
-                              <div className="flex items-center gap-1.5 text-sm text-dark-500 dark:text-dark-400">
-                                <Bed size={14} className="text-gold-500" />
-                                <span>{property.bedrooms} Beds</span>
-                              </div>
-                              <div className="flex items-center gap-1.5 text-sm text-dark-500 dark:text-dark-400">
-                                <Bath size={14} className="text-gold-500" />
-                                <span>{property.bathrooms} Baths</span>
-                              </div>
-                            </>
-                          ) : null}
-                          <div className="flex items-center gap-1.5 text-sm text-dark-500 dark:text-dark-400">
-                            <Maximize size={14} className="text-gold-500" />
-                            <span>{property.area}</span>
+                      {/* Description Area */}
+                      <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div className="space-y-2">
+                          <h3 className="text-lg font-heading font-bold text-dark-900 dark:text-white group-hover:text-gold-500 transition-colors">
+                            {property.title}
+                          </h3>
+                          <div className="flex items-center gap-1.5 text-dark-500 dark:text-dark-400">
+                            <MapPin size={14} className="text-gold-500" />
+                            <span className="text-sm">{property.location}</span>
                           </div>
                         </div>
 
-                        {/* WhatsApp Inquiry Button */}
-                        <Button 
-                          href={getInquiryLink(property.title)} 
-                          className="w-full text-sm py-2.5"
-                        >
-                          <MessageCircle size={16} />
-                          Inquire on WhatsApp
-                        </Button>
+                        <div className="space-y-4">
+                          {/* Specs */}
+                          <div className="flex items-center gap-4 pt-4 border-t border-dark-100 dark:border-dark-700">
+                            {property.type !== "land" ? (
+                              <>
+                                <div className="flex items-center gap-1.5 text-sm text-dark-500 dark:text-dark-400">
+                                  <Bed size={14} className="text-gold-500" />
+                                  <span>{property.bedrooms} Beds</span>
+                                </div>
+                                <div className="flex items-center gap-1.5 text-sm text-dark-500 dark:text-dark-400">
+                                  <Bath size={14} className="text-gold-500" />
+                                  <span>{property.bathrooms} Baths</span>
+                                </div>
+                              </>
+                            ) : null}
+                            <div className="flex items-center gap-1.5 text-sm text-dark-500 dark:text-dark-400">
+                              <Maximize size={14} className="text-gold-500" />
+                              <span>{property.area}</span>
+                            </div>
+                          </div>
+
+                          {/* View Details Button */}
+                          <div className="w-full text-sm py-2.5 px-4 rounded-xl font-semibold bg-dark-900 text-white dark:bg-white dark:text-dark-900 group-hover:bg-gold-500 dark:group-hover:bg-gold-500 group-hover:text-white dark:group-hover:text-white transition-all duration-300 flex items-center justify-center gap-2">
+                            <span>View Details</span>
+                            <ArrowRight size={16} />
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </motion.div>
+                    </motion.div>
+                  </Link>
                 ))}
               </AnimatePresence>
             </motion.div>
