@@ -210,7 +210,7 @@ export default async function PropertyDetailPage({ params }: PageProps) {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6 lg:gap-8">
               {relatedProperties.map((prop) => (
                 <Link href={`/properties/${prop.id}`} key={prop.id} className="block group">
                   <div className="rounded-2xl overflow-hidden bg-white dark:bg-dark-800 border border-dark-100 dark:border-dark-700 shadow-sm hover:shadow-xl transition-all duration-300 h-full flex flex-col justify-between">
@@ -220,25 +220,25 @@ export default async function PropertyDetailPage({ params }: PageProps) {
                         style={{ backgroundImage: `url(${prop.image})` }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                      <div className="absolute top-4 left-4">
-                        <span className="px-3 py-1 text-xs font-semibold rounded-full bg-white/20 backdrop-blur-sm text-white capitalize">
+                      <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4">
+                        <span className="px-2 py-0.5 sm:px-3 sm:py-1 text-[9px] sm:text-xs font-semibold rounded-full bg-white/20 backdrop-blur-sm text-white capitalize">
                           {prop.type}
                         </span>
                       </div>
                     </div>
                     
-                    <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
+                    <div className="p-3.5 sm:p-5 flex-1 flex flex-col justify-between space-y-3">
                       <div>
-                        <h4 className="font-heading font-bold text-dark-900 dark:text-white group-hover:text-gold-500 transition-colors text-base">
+                        <h4 className="font-heading font-bold text-dark-900 dark:text-white group-hover:text-gold-500 transition-colors text-sm sm:text-base line-clamp-1 sm:line-clamp-none">
                           {prop.title}
                         </h4>
-                        <div className="flex items-center gap-1.5 mt-1 text-dark-550 dark:text-dark-400 text-xs">
-                          <MapPin size={12} className="text-gold-500" />
-                          <span>{prop.location}</span>
+                        <div className="flex items-center gap-1 sm:gap-1.5 mt-1 text-dark-550 dark:text-dark-400 text-[10px] sm:text-xs">
+                          <MapPin size={10} className="text-gold-500 sm:w-3 sm:h-3" />
+                          <span className="truncate">{prop.location}</span>
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between pt-3 border-t border-dark-100 dark:border-dark-700 text-xs text-dark-500 dark:text-dark-450">
+                      <div className="flex items-center justify-between pt-3 border-t border-dark-100 dark:border-dark-700 text-[10px] sm:text-xs text-dark-500 dark:text-dark-450">
                         {prop.type !== "land" ? (
                           <span>{prop.bedrooms} Beds • {prop.bathrooms} Baths</span>
                         ) : (
