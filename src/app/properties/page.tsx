@@ -150,6 +150,7 @@ export default function PropertiesPage() {
                       exit={{ opacity: 0, scale: 0.9 }}
                       transition={{ duration: 0.3 }}
                       whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                      whileTap={{ scale: 1.03, transition: { duration: 0.15 } }}
                       className="flex flex-col bg-white dark:bg-dark-800 border border-dark-100 dark:border-dark-700 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 h-full"
                     >
                       {/* Image Area */}

@@ -29,7 +29,7 @@ export function FeaturedProperties() {
         <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} className="grid grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6 lg:gap-8">
           {FEATURED_PROPERTIES.map((property) => (
             <Link href={`/properties/${property.id}`} key={property.id} className="block group">
-              <motion.div variants={cardVariants} whileHover={{ y: -8, transition: { duration: 0.3 } }} className="rounded-2xl overflow-hidden bg-white dark:bg-dark-800 border border-dark-100 dark:border-dark-700 shadow-sm hover:shadow-xl transition-all duration-300 h-full">
+              <motion.div variants={cardVariants} whileHover={{ y: -8, transition: { duration: 0.3 } }} whileTap={{ scale: 1.03, transition: { duration: 0.15 } }} className="rounded-2xl overflow-hidden bg-white dark:bg-dark-800 border border-dark-100 dark:border-dark-700 shadow-sm hover:shadow-xl transition-all duration-300 h-full">
                 {/* Image */}
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url(${property.image})` }} />
