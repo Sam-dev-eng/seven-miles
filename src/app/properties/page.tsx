@@ -138,7 +138,7 @@ export default function PropertiesPage() {
           ) : (
             <motion.div 
               layout
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+              className="grid grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6 lg:gap-8"
             >
               <AnimatePresence mode="popLayout">
                 {filteredProperties.map((property) => (
@@ -159,55 +159,55 @@ export default function PropertiesPage() {
                           style={{ backgroundImage: `url(${property.image})` }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                        <div className="absolute top-4 left-4 flex gap-2">
+                        <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 flex flex-wrap gap-1.5">
                           {property.isNew && (
-                            <span className="px-3 py-1 text-xs font-semibold rounded-full bg-gold-500 text-white uppercase tracking-wider">
+                            <span className="px-2 py-0.5 sm:px-3 sm:py-1 text-[9px] sm:text-xs font-semibold rounded-full bg-gold-500 text-white uppercase tracking-wider">
                               New
                             </span>
                           )}
-                          <span className="px-3 py-1 text-xs font-semibold rounded-full bg-white/20 backdrop-blur-sm text-white capitalize">
+                          <span className="px-2 py-0.5 sm:px-3 sm:py-1 text-[9px] sm:text-xs font-semibold rounded-full bg-white/20 backdrop-blur-sm text-white capitalize">
                             {property.type}
                           </span>
                         </div>
                       </div>
-
+ 
                       {/* Description Area */}
-                      <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                        <div className="space-y-2">
-                          <h3 className="text-lg font-heading font-bold text-dark-900 dark:text-white group-hover:text-gold-500 transition-colors">
+                      <div className="p-3.5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
+                        <div className="space-y-1.5">
+                          <h3 className="text-sm sm:text-base lg:text-lg font-heading font-bold text-dark-900 dark:text-white group-hover:text-gold-500 transition-colors line-clamp-1 sm:line-clamp-none">
                             {property.title}
                           </h3>
-                          <div className="flex items-center gap-1.5 text-dark-500 dark:text-dark-400">
-                            <MapPin size={14} className="text-gold-500" />
-                            <span className="text-sm">{property.location}</span>
+                          <div className="flex items-center gap-1 sm:gap-1.5 text-dark-500 dark:text-dark-400">
+                            <MapPin size={12} className="text-gold-500 sm:w-3.5 sm:h-3.5" />
+                            <span className="text-xs sm:text-sm truncate">{property.location}</span>
                           </div>
                         </div>
-
-                        <div className="space-y-4">
+ 
+                        <div className="space-y-3 sm:space-y-4">
                           {/* Specs */}
-                          <div className="flex items-center gap-4 pt-4 border-t border-dark-100 dark:border-dark-700">
+                          <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 pt-3 border-t border-dark-100 dark:border-dark-700">
                             {property.type !== "land" ? (
                               <>
-                                <div className="flex items-center gap-1.5 text-sm text-dark-500 dark:text-dark-400">
-                                  <Bed size={14} className="text-gold-500" />
+                                <div className="flex items-center gap-1 text-xs sm:text-sm text-dark-500 dark:text-dark-400">
+                                  <Bed size={12} className="text-gold-500 sm:w-3.5 sm:h-3.5" />
                                   <span>{property.bedrooms} Beds</span>
                                 </div>
-                                <div className="flex items-center gap-1.5 text-sm text-dark-500 dark:text-dark-400">
-                                  <Bath size={14} className="text-gold-500" />
+                                <div className="flex items-center gap-1 text-xs sm:text-sm text-dark-500 dark:text-dark-400">
+                                  <Bath size={12} className="text-gold-500 sm:w-3.5 sm:h-3.5" />
                                   <span>{property.bathrooms} Baths</span>
                                 </div>
                               </>
                             ) : null}
-                            <div className="flex items-center gap-1.5 text-sm text-dark-500 dark:text-dark-400">
-                              <Maximize size={14} className="text-gold-500" />
+                            <div className="flex items-center gap-1 text-xs sm:text-sm text-dark-500 dark:text-dark-400">
+                              <Maximize size={12} className="text-gold-500 sm:w-3.5 sm:h-3.5" />
                               <span>{property.area}</span>
                             </div>
                           </div>
-
+ 
                           {/* View Details Button */}
-                          <div className="w-full text-sm py-2.5 px-4 rounded-xl font-semibold bg-dark-900 text-white dark:bg-white dark:text-dark-900 group-hover:bg-gold-500 dark:group-hover:bg-gold-500 group-hover:text-white dark:group-hover:text-white transition-all duration-300 flex items-center justify-center gap-2">
+                          <div className="w-full text-xs sm:text-sm py-2 px-3 sm:py-2.5 sm:px-4 rounded-xl font-semibold bg-dark-900 text-white dark:bg-white dark:text-dark-900 group-hover:bg-gold-500 dark:group-hover:bg-gold-500 group-hover:text-white dark:group-hover:text-white transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-2">
                             <span>View Details</span>
-                            <ArrowRight size={16} />
+                            <ArrowRight size={14} className="sm:w-4 sm:h-4" />
                           </div>
                         </div>
                       </div>

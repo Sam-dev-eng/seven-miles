@@ -26,7 +26,7 @@ export function FeaturedProperties() {
           subtitle="Explore our handpicked selection of premium properties across Lagos's most sought-after locations."
         />
 
-        <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} className="grid grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-6 lg:gap-8">
           {FEATURED_PROPERTIES.map((property) => (
             <Link href={`/properties/${property.id}`} key={property.id} className="block group">
               <motion.div variants={cardVariants} whileHover={{ y: -8, transition: { duration: 0.3 } }} className="rounded-2xl overflow-hidden bg-white dark:bg-dark-800 border border-dark-100 dark:border-dark-700 shadow-sm hover:shadow-xl transition-all duration-300 h-full">
@@ -34,27 +34,27 @@ export function FeaturedProperties() {
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{ backgroundImage: `url(${property.image})` }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <div className="absolute top-4 left-4 flex gap-2">
-                    {property.isNew && <span className="px-3 py-1 text-xs font-semibold rounded-full bg-gold-500 text-white uppercase tracking-wider">New</span>}
-                    <span className="px-3 py-1 text-xs font-semibold rounded-full bg-white/20 backdrop-blur-sm text-white capitalize">{property.type}</span>
+                  <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 flex flex-wrap gap-1.5">
+                    {property.isNew && <span className="px-2 py-0.5 sm:px-3 sm:py-1 text-[9px] sm:text-xs font-semibold rounded-full bg-gold-500 text-white uppercase tracking-wider">New</span>}
+                    <span className="px-2 py-0.5 sm:px-3 sm:py-1 text-[9px] sm:text-xs font-semibold rounded-full bg-white/20 backdrop-blur-sm text-white capitalize">{property.type}</span>
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-5 lg:p-6">
-                  <h3 className="text-lg font-heading font-bold mb-2 text-dark-900 dark:text-white group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors">{property.title}</h3>
-                  <div className="flex items-center gap-1.5 mb-4 text-dark-500 dark:text-dark-400">
-                    <MapPin size={14} className="text-gold-500" />
-                    <span className="text-sm">{property.location}</span>
+                <div className="p-3.5 sm:p-5 lg:p-6">
+                  <h3 className="text-sm sm:text-base lg:text-lg font-heading font-bold mb-1.5 text-dark-900 dark:text-white group-hover:text-gold-600 dark:group-hover:text-gold-400 transition-colors line-clamp-1 sm:line-clamp-none">{property.title}</h3>
+                  <div className="flex items-center gap-1 sm:gap-1.5 mb-3 text-dark-500 dark:text-dark-400">
+                    <MapPin size={12} className="text-gold-500 sm:w-3.5 sm:h-3.5" />
+                    <span className="text-xs sm:text-sm truncate">{property.location}</span>
                   </div>
-                  <div className="flex items-center gap-4 pt-4 border-t border-dark-100 dark:border-dark-700">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 pt-3 border-t border-dark-100 dark:border-dark-700">
                     {property.type !== "land" ? (
                       <>
-                        <div className="flex items-center gap-1.5 text-sm text-dark-500 dark:text-dark-400"><Bed size={14} className="text-gold-500" /><span>{property.bedrooms} Beds</span></div>
-                        <div className="flex items-center gap-1.5 text-sm text-dark-500 dark:text-dark-400"><Bath size={14} className="text-gold-500" /><span>{property.bathrooms} Baths</span></div>
+                        <div className="flex items-center gap-1 text-xs sm:text-sm text-dark-500 dark:text-dark-400"><Bed size={12} className="text-gold-500 sm:w-3.5 sm:h-3.5" /><span>{property.bedrooms} Beds</span></div>
+                        <div className="flex items-center gap-1 text-xs sm:text-sm text-dark-500 dark:text-dark-400"><Bath size={12} className="text-gold-500 sm:w-3.5 sm:h-3.5" /><span>{property.bathrooms} Baths</span></div>
                       </>
                     ) : null}
-                    <div className="flex items-center gap-1.5 text-sm text-dark-500 dark:text-dark-400"><Maximize size={14} className="text-gold-500" /><span>{property.area}</span></div>
+                    <div className="flex items-center gap-1 text-xs sm:text-sm text-dark-500 dark:text-dark-400"><Maximize size={12} className="text-gold-500 sm:w-3.5 sm:h-3.5" /><span>{property.area}</span></div>
                   </div>
                 </div>
               </motion.div>

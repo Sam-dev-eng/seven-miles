@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef } from "react";
-import { HelpCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
+import { HelpCircle, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { SectionHeading } from "@/components/ui/section-heading";
 
 interface FAQItem {
@@ -33,86 +34,75 @@ const FAQ_ITEMS: FAQItem[] = [
 ];
 
 export function FAQ() {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0); // Default open the first one
 
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: -350,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({
-        left: 350,
-        behavior: "smooth",
-      });
-    }
+  const toggleAccordion = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section id="faq" className="py-20 lg:py-28 bg-dark-50 dark:bg-dark-900 border-t border-dark-100 dark:border-dark-800 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
-          <div className="max-w-2xl">
-            <SectionHeading 
-              title="Frequently Asked Questions" 
-              subtitle="Quick answers to common questions about our property acquisition, payment plans, and legal processes." 
-            />
-          </div>
-          {/* Navigation Controls */}
-          <div className="flex gap-3 mt-4 md:mt-0">
-            <button
-              onClick={scrollLeft}
-              className="h-12 w-12 rounded-full border border-dark-200 dark:border-dark-700 bg-white dark:bg-dark-800 text-dark-800 dark:text-white flex items-center justify-center hover:bg-gold-500 hover:text-white dark:hover:bg-gold-500 dark:hover:text-white hover:border-gold-500 dark:hover:border-gold-500 transition-all cursor-pointer shadow-sm"
-              aria-label="Scroll left"
-            >
-              <ChevronLeft size={20} />
-            </button>
-            <button
-              onClick={scrollRight}
-              className="h-12 w-12 rounded-full border border-dark-200 dark:border-dark-700 bg-white dark:bg-dark-800 text-dark-800 dark:text-white flex items-center justify-center hover:bg-gold-500 hover:text-white dark:hover:bg-gold-500 dark:hover:text-white hover:border-gold-500 dark:hover:border-gold-500 transition-all cursor-pointer shadow-sm"
-              aria-label="Scroll right"
-            >
-              <ChevronRight size={20} />
-            </button>
-          </div>
-        </div>
+    <section id="faq" className="py-20 lg:py-28 bg-dark-50 dark:bg-dark-900 border-t border-dark-100 dark:border-dark-800">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <SectionHeading 
+          title="Frequently Asked Questions" 
+          subtitle="Quick answers to common questions about our property acquisition, payment plans, and legal processes." 
+        />
 
-        {/* Horizontal Scroll Snap Container */}
-        <div 
-          ref={scrollContainerRef}
-          className="flex gap-6 overflow-x-auto pb-8 scrollbar-none snap-x snap-mandatory touch-pan-x"
-          style={{ scrollbarWidth: "none" }}
-        >
-          {FAQ_ITEMS.map((item, index) => (
-            <div 
-              key={index}
-              className="w-[300px] sm:w-[360px] md:w-[400px] flex-shrink-0 snap-start snap-always rounded-2xl border border-dark-150 dark:border-dark-800 bg-white dark:bg-dark-850 p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300 min-h-[320px] sm:min-h-[280px]"
-            >
-              <div className="space-y-4">
-                {/* Icon & Question */}
-                <div className="flex items-start gap-3">
-                  <div className="h-10 w-10 rounded-xl bg-gold-500/10 flex items-center justify-center text-gold-500 flex-shrink-0">
-                    <HelpCircle size={20} />
+        <div className="mt-12 space-y-4 max-w-3xl mx-auto">
+          {FAQ_ITEMS.map((item, index) => {
+            const isOpen = openIndex === index;
+            return (
+              <div 
+                key={index}
+                className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
+                  isOpen 
+                    ? "border-gold-500/30 bg-white dark:bg-dark-850 shadow-md ring-1 ring-gold-500/10" 
+                    : "border-dark-150 dark:border-dark-800/80 bg-white/70 dark:bg-dark-850/50 hover:bg-white dark:hover:bg-dark-850 shadow-sm"
+                }`}
+              >
+                <button
+                  onClick={() => toggleAccordion(index)}
+                  className="w-full text-left py-5 px-6 flex items-center justify-between gap-4 cursor-pointer focus:outline-none"
+                  aria-expanded={isOpen}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className={`h-10 w-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-colors duration-300 ${
+                      isOpen ? "bg-gold-500 text-white" : "bg-gold-500/10 text-gold-500"
+                    }`}>
+                      <HelpCircle size={20} />
+                    </div>
+                    <span className={`font-heading font-bold text-base sm:text-lg leading-snug transition-colors duration-300 ${
+                      isOpen ? "text-gold-600 dark:text-gold-400" : "text-dark-900 dark:text-white"
+                    }`}>
+                      {item.question}
+                    </span>
                   </div>
-                  <h3 className="font-heading font-bold text-dark-900 dark:text-white text-base sm:text-lg leading-snug">
-                    {item.question}
-                  </h3>
-                </div>
-                {/* Subtle Divider */}
-                <div className="h-px w-full bg-dark-100 dark:bg-dark-850" />
-              </div>
+                  <ChevronDown 
+                    size={20} 
+                    className={`text-dark-400 dark:text-dark-500 flex-shrink-0 transition-transform duration-300 ${
+                      isOpen ? "rotate-180 text-gold-500 dark:text-gold-400" : ""
+                    }`}
+                  />
+                </button>
 
-              {/* Answer Text */}
-              <p className="text-sm sm:text-base text-dark-600 dark:text-dark-300 leading-relaxed mt-4">
-                {item.answer}
-              </p>
-            </div>
-          ))}
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      key="content"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: [0.04, 0.62, 0.23, 0.98] }}
+                    >
+                      <div className="px-6 pb-6 pt-1 pl-6 sm:pl-20 border-t border-dark-100 dark:border-dark-800/50 text-sm sm:text-base text-dark-600 dark:text-dark-300 leading-relaxed">
+                        {item.answer}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

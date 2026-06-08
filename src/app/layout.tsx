@@ -40,7 +40,7 @@ export default function RootLayout({
       className={`${playfair.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
-      <body className="bg-white dark:bg-dark-900 text-dark-900 dark:text-dark-50 antialiased min-h-screen flex flex-col">
+      <body className="bg-white dark:bg-dark-900 text-dark-900 dark:text-dark-50 antialiased min-h-screen flex flex-col" suppressHydrationWarning>
         <ThemeProvider>
           <Navbar />
           <main className="flex-grow">
